@@ -1,0 +1,21 @@
+{
+    "name": "anandsiddharth/laravel-paytm-wallet",
+    "description": "Integrate paytm wallet easily with this package. This package uses official Paytm PHP SDK's",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "anandsiddharth",
+            "email": "anandsiddharth21@gmail.com"
+        }
+    ],
+    "require": {
+        "php": "^5.3.3 || ^7.0",
+        "illuminate/support": "~5.0",
+        "illuminate/contracts": "~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Anand\\LaravelPaytmWallet": "src/"
+        }
+    }
+}
