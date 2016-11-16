@@ -1,10 +1,11 @@
 # Laravel Paytm Wallet
+For Laravel 5.0 and above
 
 ## Introduction
 Integrate paytm wallet in your laravel application easily with this package. This package uses official Paytm PHP SDK's.
 
 ## License
-Laravel Paytm Wallet open-sourced software licensed under the [MIT license]((http://opensource.org/licenses/MIT))
+Laravel Paytm Wallet open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ## Getting Started
 To get started add the following package to your `composer.json` file using this command.
@@ -105,7 +106,7 @@ Make sure the `callback_url` you have mentioned while receiving payment is `post
 ```php
 Route::post('/payment/status', 'OrderController@paymentCallback');
 ```
-
+Important: The `callback_url` must not be csrf protected [Check out here to how to do that](https://laracasts.com/discuss/channels/general-discussion/l5-disable-csrf-middleware-on-certain-routes)
 ### Get transaction information using order id
 
 ```php
