@@ -71,7 +71,7 @@ class OrderController extends Controller
           'amount' => $order->amount,
           'callback_url' => 'http://example.com/payment/status'
         ]);
-        return $payemnt->receive();
+        return $payment->receive();
     }
 
     /**
