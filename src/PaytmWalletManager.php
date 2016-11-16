@@ -12,7 +12,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 
 
 	public function with($driver){
-		return $this->driver = $driver;
+		return $this->driver($driver);
 	}
 
 	protected function createReceiveDriver(){

@@ -30,7 +30,7 @@ class BalanceCheckProvider extends PaytmWalletProvider{
 		return $this;
 	}
 
-	public function receive(){
+	public function check(){
 		if ($this->parameters == null) {
 			throw new \Exception("prepare() method not called");
 		}

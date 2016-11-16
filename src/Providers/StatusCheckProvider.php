@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 
 class StatusCheckProvider extends PaytmWalletProvider{
 	private $parameters = null;
+    private $response;
 
 	public function prepare($params = array()){
 		$defaults = [
@@ -26,7 +27,7 @@ class StatusCheckProvider extends PaytmWalletProvider{
 	}
 
 
-	public function receive(){
+	public function check(){
 		if ($this->parameters == null) {
 			throw new \Exception("prepare() method not called");
 		}
@@ -38,9 +39,43 @@ class StatusCheckProvider extends PaytmWalletProvider{
 
 		$params = [
 			'MID' => $this->merchant_id,
-			'ORDER_ID' => $this->parameters['order'],
+			'ORDER_ID' => $this->parameters['order']
 		];
-		
-		return $this->api_call($this->paytm_txn_status_url, $params);
+		$this->response = $this->api_call($this->paytm_txn_status_url, $params);
+		return $this;
 	}
+
+    public function response(){
+        return $this->response;
+    }
+
+    public function isSuccessful(){
+        if($this->response()->STATUS == PaytmWallet::STATUS_SUCCESSFUL){
+            return true;
+        }
+        return false;
+    }
+
+    public function isFailed(){
+        if ($this->response()->STATUS == PaytmWallet::STATUS_FAILURE) {
+            return true;
+        }
+        return false;
+    }
+
+    public function isOpen(){
+        if ($this->response()->STATUS == PaytmWallet::STATUS_OPEN){
+            return true;
+        }
+        return false;
+    }
+
+    public function getOrderId(){
+        return $this->response()->ORDERID;
+    }
+    public function getTransactionId(){
+        return $this->response()->TXNID;
+    }
+
+
 }
