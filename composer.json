@@ -9,6 +9,7 @@
             "email": "anandsiddharth21@gmail.com"
         }
     ],
+    "minimum-stability": "dev",
     "require": {
         "php": ">=5.4.0",
         "illuminate/support": "~5.0",
