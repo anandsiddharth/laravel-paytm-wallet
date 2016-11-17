@@ -13,7 +13,7 @@
 				@foreach ($params as $key => $value)
 					<input type="hidden" name="{{$key}}"  value="{{$value}}" />
 				@endforeach
-				<input type="hidden" name="CHECKSUMHASH" value="<?php echo $checkSum ?>">
+				<input type="hidden" name="CHECKSUMHASH" value="{{$checkSum}}">
 			</tbody>
 		</table>
 		<script type="text/javascript">
