@@ -140,8 +140,8 @@ class OrderController extends Controller
         }
         
         //get important parameters via public methods
-        $transaction->getOrderId(); // Get order id
-        $transaction->getTransactionId(); // Get transaction id
+        $status->getOrderId(); // Get order id
+        $status->getTransactionId(); // Get transaction id
     }
 }
 ```
