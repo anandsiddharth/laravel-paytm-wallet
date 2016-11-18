@@ -10,16 +10,25 @@ class PaytmAppProvider extends PaytmWalletProvider{
 		return response()->json([ 'CHECKSUMHASH' => $checksum, 'ORDER_ID' => $request->get('ORDER_ID'), 'payt_STATUS'  => '1' ]);
 	}
 
-	public function verify(Request $request){
+	public function verify(Request $request, $success = null, $error = null){
 		$paramList = $request->all();
 		$return_array = $request->all();
 		$paytmChecksum = $request->get('CHECKSUMHASH');
 
 		$isValidChecksum = verifychecksum_e($paramList, $this->merchant_key, $paytmChecksum);
+		
+		if ($isValidChecksum) {
+			$success();
+		}else{
+			$error();
+		}
+
 		$return_array["IS_CHECKSUM_VALID"] = $isValidChecksum ? "Y" : "N";
 		unset($return_array["CHECKSUMHASH"]);
 		$encoded_json = htmlentities(json_encode($return_array));
 
 		return view('paytmwallet::app_redirect.blade.php')->with('json', $encoded_json);
 	}
+
+
 }
