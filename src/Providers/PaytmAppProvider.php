@@ -18,9 +18,13 @@ class PaytmAppProvider extends PaytmWalletProvider{
 		$isValidChecksum = verifychecksum_e($paramList, $this->merchant_key, $paytmChecksum);
 		
 		if ($isValidChecksum) {
-			$success();
+			if ($success != null) {
+				$success();
+			}
 		}else{
-			$error();
+			if ($error != null) {
+				$error();
+			}
 		}
 
 		$return_array["IS_CHECKSUM_VALID"] = $isValidChecksum ? "Y" : "N";
