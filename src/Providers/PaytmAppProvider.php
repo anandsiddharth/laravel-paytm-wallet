@@ -31,7 +31,7 @@ class PaytmAppProvider extends PaytmWalletProvider{
 		unset($return_array["CHECKSUMHASH"]);
 		$encoded_json = htmlentities(json_encode($return_array));
 
-		return view('paytmwallet::app_redirect.blade.php')->with('json', $encoded_json);
+		return view('paytmwallet::app_redirect')->with('json', $encoded_json);
 	}
 
 
