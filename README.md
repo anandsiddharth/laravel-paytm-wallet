@@ -145,3 +145,8 @@ class OrderController extends Controller
     }
 }
 ```
+
+## Support on Beerpay
+Hey dude! Help me out for a couple of :beers:!
+
+[![Beerpay](https://beerpay.io/anandsiddharth/laravel-paytm-wallet/badge.svg?style=beer-square)](https://beerpay.io/anandsiddharth/laravel-paytm-wallet)  [![Beerpay](https://beerpay.io/anandsiddharth/laravel-paytm-wallet/make-wish.svg?style=flat-square)](https://beerpay.io/anandsiddharth/laravel-paytm-wallet?focus=wish)
