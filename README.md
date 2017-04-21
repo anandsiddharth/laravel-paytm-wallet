@@ -30,7 +30,7 @@ Also, add the `PaytmWallet` facade to the `aliases` array in your `app` configur
 ],
 ```
 #### One more step to go....
-On your `app/services.php` add the following configuration
+On your `config/services.php` add the following configuration
 
 ```php
 'paytm-wallet' => [
