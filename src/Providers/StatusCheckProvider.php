@@ -45,9 +45,6 @@ class StatusCheckProvider extends PaytmWalletProvider{
 		return $this;
 	}
 
-    public function response(){
-        return $this->response;
-    }
 
     public function isSuccessful(){
         if($this->response()->STATUS == PaytmWallet::STATUS_SUCCESSFUL){
