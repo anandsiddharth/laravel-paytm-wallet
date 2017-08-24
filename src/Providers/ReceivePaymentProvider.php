@@ -42,6 +42,7 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
 
 	private function beginTransaction(){
 		$params = [
+			'REQUEST_TYPE' => 'DEFAULT',
 			'MID' => $this->merchant_id,
 			'ORDER_ID' => $this->parameters['order'],
 			'CUST_ID' => $this->parameters['user'],
