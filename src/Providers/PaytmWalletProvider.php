@@ -6,7 +6,6 @@ use Dompdf\Exception;
 use Illuminate\Http\Request;
 require __DIR__.'/../../lib/encdec_paytm.php';
 
-
 class PaytmWalletProvider{
 
 	protected $request;
@@ -31,7 +30,8 @@ class PaytmWalletProvider{
 			$domain = 'pguat.paytm.com';
 		}
 		$this->paytm_txn_url = 'https://'.$domain.'/oltp-web/processTransaction';
-		$this->paytm_txn_status_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/TXNSTATUS';
+		// $this->paytm_txn_status_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/TXNSTATUS';
+		$this->paytm_txn_status_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/getTxnStatus';
 		$this->paytm_refund_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/REFUND';
 		$this->paytm_balance_check = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/checkBalance';
 
@@ -52,22 +52,11 @@ class PaytmWalletProvider{
 
 
 	public function api_call($url, $params){
-		$jsonResponse = "";
-		$responseParamList = array();
-		$JsonData =json_encode($params);
-		$postData = 'JsonData='.urlencode($JsonData);
-		$ch = curl_init($url);
-		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");                                                                     
-		curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);                                                                  
-		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-		curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
-		curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
-		curl_setopt($ch, CURLOPT_HTTPHEADER, array(                                                                         
-			'Content-Type: application/json', 
-			'Content-Length: ' . strlen($postData))                                                                       
-		);  
-		$jsonResponse = curl_exec($ch);   
-		return $responseParamList = json_decode($jsonResponse,true);
+		return callNew($url, $params);
+	}
+
+	public function api_call_new($url, $params){
+		return callNewAPI($url, $params);
 	}
 
 

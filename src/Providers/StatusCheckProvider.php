@@ -5,7 +5,7 @@ use Illuminate\Http\Request;
 
 class StatusCheckProvider extends PaytmWalletProvider{
 	private $parameters = null;
-    private $response;
+    protected $response;
 
 	public function prepare($params = array()){
 		$defaults = [
@@ -36,13 +36,18 @@ class StatusCheckProvider extends PaytmWalletProvider{
 	
 
 	private function beginTransaction(){
-
-		$params = [
+		$params = array(
 			'MID' => $this->merchant_id,
-			'ORDER_ID' => $this->parameters['order']
-		];
-		$this->response = $this->api_call($this->paytm_txn_status_url, $params);
+			'ORDERID' => $this->parameters['order']
+		);
+		$chk = getChecksumFromArray($params, $this->merchant_key);
+		$params['CHECKSUMHASH'] = $chk;
+		$this->response = $this->api_call_new($this->paytm_txn_status_url, $params);
 		return $this;
+	}
+
+	public function response(){
+		return $this->response;
 	}
 
 
