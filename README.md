@@ -107,7 +107,7 @@ Make sure the `callback_url` you have mentioned while receiving payment is `post
 Route::post('/payment/status', 'OrderController@paymentCallback');
 ```
 Important: The `callback_url` must not be csrf protected [Check out here to how to do that](https://laracasts.com/discuss/channels/general-discussion/l5-disable-csrf-middleware-on-certain-routes)
-### Get transaction information using order id
+### Get transaction status/information using order id
 
 ```php
 <?php
