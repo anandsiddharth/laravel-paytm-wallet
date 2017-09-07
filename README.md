@@ -1,4 +1,6 @@
 # Laravel Paytm Wallet
+
+[![Join the chat at https://gitter.im/laravel-paytm-wallet/Lobby](https://badges.gitter.im/laravel-paytm-wallet/Lobby.svg)](https://gitter.im/laravel-paytm-wallet/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 For Laravel 5.0 and above
 
 ## Introduction
