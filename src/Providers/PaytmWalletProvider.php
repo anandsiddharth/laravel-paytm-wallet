@@ -52,11 +52,12 @@ class PaytmWalletProvider{
 
 
 	public function api_call($url, $params){
-		return callNew($url, $params);
+
+		return callAPI($url, $params);
 	}
 
 	public function api_call_new($url, $params){
-		return callNewAPI($url, $params);
+		return callAPI($url, $params);
 	}
 
 
