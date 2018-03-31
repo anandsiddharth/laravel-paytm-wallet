@@ -2,7 +2,6 @@
 
 namespace Anand\LaravelPaytmWallet\Providers;
 
-use Dompdf\Exception;
 use Illuminate\Http\Request;
 require __DIR__.'/../../lib/encdec_paytm.php';
 
@@ -44,10 +43,10 @@ class PaytmWalletProvider{
 
 	public function response(){
 		$checksum = $this->request->get('CHECKSUMHASH');
-        if(verifychecksum_e($this->request->all(), $this->merchant_key, $checksum) == "TRUE"){
-            return (object) $this->request->all();
-        }
-        throw new Exception('Invalid checksum');
+		if(verifychecksum_e($this->request->all(), $this->merchant_key, $checksum) == "TRUE"){
+		    return (object) $this->request->all();
+		}
+        	throw new \Exception('Invalid checksum');
 	}
 
 
