@@ -87,4 +87,8 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
         return $this->response()->TXNID;
     }
 
+    public function getResponseMessage() {
+    	return $this->response()->RESPMSG;
+    }
+
 }
