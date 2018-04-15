@@ -96,7 +96,7 @@ class OrderController extends Controller
         }else if($transaction->isOpen()){
           //Transaction Open/Processing
         }
-        
+        $transaction->getResponseMessage(); //Get Response Message If Available
         //get important parameters via public methods
         $transaction->getOrderId(); // Get order id
         $transaction->getTransactionId(); // Get transaction id
@@ -141,7 +141,7 @@ class OrderController extends Controller
         }else if($status->isOpen()){
           //Transaction Open/Processing
         }
-        
+        $status->getResponseMessage(); //Get Response Message If Available
         //get important parameters via public methods
         $status->getOrderId(); // Get order id
         $status->getTransactionId(); // Get transaction id
