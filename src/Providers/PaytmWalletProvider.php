@@ -49,9 +49,9 @@ class PaytmWalletProvider{
         	throw new \Exception('Invalid checksum');
 	}
 
-    public function getResponseMessage() {
-    	return $this->response()->RESPMSG;
-    }
+    	public function getResponseMessage() {
+    		return @$this->response()->RESPMSG;
+   	}
 
 	public function api_call($url, $params){
 
