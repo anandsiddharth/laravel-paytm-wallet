@@ -72,7 +72,7 @@ class OrderController extends Controller
           'mobile_number' => $user->phonenumber,
           'email' => $user->email,
           'amount' => $order->amount,
-          'callback_url' => 'http://example.com/payment/status'
+          'callback_url' => 'http://example.com/payment/status?ORDER_ID=ORDER_ID'
         ]);
         return $payment->receive();
     }
