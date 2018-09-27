@@ -24,15 +24,14 @@ class PaytmWalletProvider{
 		$this->request = $request;
 		
 		if ($config['env'] == 'production') {
-			$domain = 'secure.paytm.in';
+			$domain = 'securegw.paytm.in';
 		}else{
-			$domain = 'pguat.paytm.com';
+			$domain = 'securegw-stage.paytm.in';
 		}
-		$this->paytm_txn_url = 'https://'.$domain.'/oltp-web/processTransaction';
-		// $this->paytm_txn_status_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/TXNSTATUS';
-		$this->paytm_txn_status_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/getTxnStatus';
-		$this->paytm_refund_url = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/REFUND';
-		$this->paytm_balance_check = 'https://'.$domain.'/oltp/HANDLER_INTERNAL/checkBalance';
+		$this->paytm_txn_url = 'https://'.$domain.'/theia/processTransaction';
+		$this->paytm_txn_status_url = 'https://'.$domain.'/merchant-status/getTxnStatus';
+		$this->paytm_refund_url = 'https://'.$domain.'/refund/HANDLER_INTERNAL/REFUND';
+		$this->paytm_balance_check = 'https://'.$domain.'/refund/HANDLER_INTERNAL/getRefundStatus';
 
 		$this->merchant_key = $config['merchant_key'];
 		$this->merchant_id = $config['merchant_id'];
