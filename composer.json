@@ -24,7 +24,10 @@
         "laravel": {
             "providers": [
                 "Anand\\LaravelPaytmWallet\\PaytmWalletServiceProvider"
-            ]
+            ],
+            "aliases": {
+                "PaytmWallet": "Anand\\LaravelPaytmWallet\\Facades\\PaytmWallet"
+            }
         }
     }
 }
