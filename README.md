@@ -16,6 +16,8 @@ To get started add the following package to your `composer.json` file using this
     composer require anandsiddharth/laravel-paytm-wallet
 
 ## Configuring
+Note: For Laravel 5.5 and above auto-discovery takes care of below configuration.
+
 When composer installs Laravel Paytm Wallet library successfully, register the `Anand\LaravelPaytmWallet\PaytmWalletServiceProvider` in your `config/app.php` configuration file.
 
 ```php
