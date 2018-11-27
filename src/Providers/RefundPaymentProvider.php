@@ -38,7 +38,7 @@ class RefundPaymentProvider extends PaytmWalletProvider{
         $params = array();
         $params["MID"] = $this->merchant_id;
         $params["ORDERID"] = $this->parameters['order']; 
-        $params["REFID"] = $this->parameters['refund'];
+        $params["REFID"] = $this->parameters['reference'];
         $params["TXNTYPE"] = 'REFUND';
         $params["REFUNDAMOUNT"] = $this->parameters['amount'];
         $params["TXNID"] = $this->parameters['transaction'];
