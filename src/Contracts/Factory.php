@@ -5,10 +5,10 @@ namespace Anand\LaravelPaytmWallet\Contracts;
 interface Factory
 {
     /**
-     * Get an OAuth provider implementation.
+     * Get Paytm Wallet Provider
      *
      * @param  string  $driver
-     * @return \Laravel\Socialite\Contracts\Provider
+     * @return \Anand\LaravelPaytmWallet\Contracts\Provider
      */
     
     public function driver($do = null);
