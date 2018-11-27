@@ -13,7 +13,7 @@ class RefundPaymentProvider extends PaytmWalletProvider{
     public function prepare($params = array()){
 		$defaults = [
             'order' => NULL,
-            'refund' => NULL,
+            'reference' => NULL,
             'amount' => NULL,
             'transaction' => NULL
 		];
