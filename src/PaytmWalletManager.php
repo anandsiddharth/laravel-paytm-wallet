@@ -47,6 +47,14 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 			$this->config
 			);
 	}
+
+	protected function createRefundDriver() {
+		$this->config = $this->app['config']['services.paytm-wallet'];
+		return $this->buildProvider(
+			'Anand\LaravelPaytmWallet\Providers\RefundPaymentProvider',
+			$this->config
+			);
+	}
 	
 
 	public function getDefaultDriver(){
