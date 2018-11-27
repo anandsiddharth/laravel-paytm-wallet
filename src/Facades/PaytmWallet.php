@@ -17,6 +17,7 @@ class PaytmWallet extends Facade
     const STATUS_SUCCESSFUL = 'TXN_SUCCESS';
     const STATUS_FAILURE = 'TXN_FAILURE';
     const STATUS_OPEN = 'OPEN';
+    const STATUS_PENDING = 'PENDING';
 
     const RESPONSE_SUCCESSFUL="01";
     const RESPONSE_CANCELLED = "141";
