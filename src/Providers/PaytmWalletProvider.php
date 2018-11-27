@@ -1,11 +1,11 @@
 <?php
 
 namespace Anand\LaravelPaytmWallet\Providers;
-
+use Anand\LaravelPaytmWallet\Contracts\Provider as ProviderContract;
 use Illuminate\Http\Request;
 require __DIR__.'/../../lib/encdec_paytm.php';
 
-class PaytmWalletProvider{
+class PaytmWalletProvider implements ProviderContract {
 
 	protected $request;
 	protected $response;
