@@ -2,13 +2,15 @@
 
 namespace Anand\LaravelPaytmWallet\Providers;
 use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
+use Anand\LaravelPaytmWallet\Traits\HasTransactionStatus;
 use Illuminate\Http\Request;
 
 
 class RefundPaymentProvider extends PaytmWalletProvider{
+    use HasTransactionStatus;
+    
 	private $parameters = null;
     protected $response;
-
 
     public function prepare($params = array()){
 		$defaults = [
@@ -32,8 +34,6 @@ class RefundPaymentProvider extends PaytmWalletProvider{
 		return $this;
     }
     
-
-
     private function beginTransaction(){
         $params = array();
         $params["MID"] = $this->merchant_id;
@@ -59,31 +59,9 @@ class RefundPaymentProvider extends PaytmWalletProvider{
     public function response(){
 		return $this->response;
     }
-    
-
-    public function isSuccessful(){
-        if($this->response()->STATUS == PaytmWallet::STATUS_SUCCESSFUL){
-            return true;
-        }
-        return false;
-    }
-
-    public function isFailed(){
-        if ($this->response()->STATUS == PaytmWallet::STATUS_FAILURE) {
-            return true;
-        }
-        return false;
-    }
 
     public function isRefundAlreadyRaised() {
         if ($this->isFailed() && $this->response()->RESPCODE == PaytmWallet::REPSONSE_REFUND_ALREADY_RAISED) {
-            return true;
-        }
-        return false;
-    }
-
-    public function isOpen(){
-        if ($this->response()->STATUS == PaytmWallet::STATUS_OPEN){
             return true;
         }
         return false;

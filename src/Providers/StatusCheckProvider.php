@@ -1,9 +1,11 @@
 <?php
 namespace Anand\LaravelPaytmWallet\Providers;
+use Anand\LaravelPaytmWallet\Traits\HasTransactionStatus;
 use Illuminate\Http\Request;
-// require __DIR__.'/../../lib/encdec_paytm.php';
 
 class StatusCheckProvider extends PaytmWalletProvider{
+	use HasTransactionStatus;
+	
 	private $parameters = null;
     protected $response;
 
@@ -49,28 +51,6 @@ class StatusCheckProvider extends PaytmWalletProvider{
 	public function response(){
 		return $this->response;
 	}
-
-
-    public function isSuccessful(){
-        if($this->response()->STATUS == PaytmWallet::STATUS_SUCCESSFUL){
-            return true;
-        }
-        return false;
-    }
-
-    public function isFailed(){
-        if ($this->response()->STATUS == PaytmWallet::STATUS_FAILURE) {
-            return true;
-        }
-        return false;
-    }
-
-    public function isOpen(){
-        if ($this->response()->STATUS == PaytmWallet::STATUS_OPEN){
-            return true;
-        }
-        return false;
-    }
 
     public function getOrderId(){
         return $this->response()->ORDERID;

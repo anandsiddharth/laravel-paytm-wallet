@@ -2,11 +2,12 @@
 
 namespace Anand\LaravelPaytmWallet\Providers;
 use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
+use Anand\LaravelPaytmWallet\Traits\HasTransactionStatus;
 use Illuminate\Http\Request;
-//require __DIR__.'/../../lib/encdec_paytm.php';
 
 class ReceivePaymentProvider extends PaytmWalletProvider{
-
+	use HasTransactionStatus;
+	
 	private $parameters = null;
 
     public function prepare($params = array()){
@@ -56,29 +57,6 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
         ];
 		return view('paytmwallet::transact')->with('params', $params)->with('txn_url', $this->paytm_txn_url)->with('checkSum', getChecksumFromArray($params, $this->merchant_key));
 	}
-
-
-	public function isSuccessful(){
-
-        if($this->response()->STATUS == PaytmWallet::STATUS_SUCCESSFUL){
-            return true;
-        }
-        return false;
-    }
-
-    public function isFailed(){
-        if ($this->response()->STATUS == PaytmWallet::STATUS_FAILURE) {
-            return true;
-        }
-        return false;
-    }
-
-    public function isOpen(){
-        if ($this->response()->STATUS == PaytmWallet::STATUS_OPEN){
-            return true;
-        }
-        return false;
-    }
 
     public function getOrderId(){
         return $this->response()->ORDERID;
