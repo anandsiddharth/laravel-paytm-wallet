@@ -45,21 +45,18 @@ class PaytmWalletProvider{
 		if(verifychecksum_e($this->request->all(), $this->merchant_key, $checksum) == "TRUE"){
 		    return (object) $this->request->all();
 		}
-        	throw new \Exception('Invalid checksum');
+        throw new \Exception('Invalid checksum');
 	}
 
-    	public function getResponseMessage() {
-    		return @$this->response()->RESPMSG;
+	public function getResponseMessage() {
+    	return @$this->response()->RESPMSG;
    	}
 
 	public function api_call($url, $params){
-
 		return callAPI($url, $params);
 	}
 
 	public function api_call_new($url, $params){
 		return callAPI($url, $params);
 	}
-
-
 }
