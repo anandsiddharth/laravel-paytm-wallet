@@ -11,6 +11,8 @@ class PaytmWalletProvider implements ProviderContract {
 	protected $response;
 	protected $paytm_txn_url;
 	protected $paytm_txn_status_url;
+	protected $paytm_refund_url;
+	protected $paytm_refund_status_url;
 	protected $paytm_balance_check_url;
 
 	protected $merchant_key;
@@ -31,7 +33,8 @@ class PaytmWalletProvider implements ProviderContract {
 		$this->paytm_txn_url = 'https://'.$domain.'/theia/processTransaction';
 		$this->paytm_txn_status_url = 'https://'.$domain.'/merchant-status/getTxnStatus';
 		$this->paytm_refund_url = 'https://'.$domain.'/refund/HANDLER_INTERNAL/REFUND';
-		$this->paytm_balance_check = 'https://'.$domain.'/refund/HANDLER_INTERNAL/getRefundStatus';
+		$this->paytm_refund_status_url = 'https://'.$domain.'/refund/HANDLER_INTERNAL/getRefundStatus';
+		$this->paytm_balance_check_url = 'https://'.$domain.'/refund/HANDLER_INTERNAL/getRefundStatus';
 
 		$this->merchant_key = $config['merchant_key'];
 		$this->merchant_id = $config['merchant_id'];
