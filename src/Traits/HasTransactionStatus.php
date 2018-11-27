@@ -1,6 +1,7 @@
 <?php
 
 namespace Anand\LaravelPaytmWallet\Traits;
+use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
 
 trait HasTransactionStatus {
 
