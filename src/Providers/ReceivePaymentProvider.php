@@ -43,7 +43,9 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
 	}
 
 	public function view($view) {
-		$this->view = $view;
+		if($view) {
+			$this->view = $view;
+		}
 		return $this;
 	}
 
