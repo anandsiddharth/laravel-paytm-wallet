@@ -51,6 +51,8 @@ Note : All the credentials mentioned are provided by Paytm after signing up as m
 
 ## Usage
 
+
+### Making a transaction
 ```php
 <?php
 
@@ -150,6 +152,58 @@ class OrderController extends Controller
     }
 }
 ```
+
+### Customizing transaction being processed page
+Considering the modern app user interfaces, default "transaction being processed page" is too dull which comes with this package. If you would like to modify this, you have the option to do so. Here's how:
+You just need to change 1 line in you `OrderController`'s code.
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use PaytmWallet;
+
+class OrderController extends Controller
+{
+    /**
+     * Redirect the user to the Payment Gateway.
+     *
+     * @return Response
+     */
+    public function order()
+    {
+        $payment = PaytmWallet::with('receive');
+        $payment->prepare([
+          'order' => $order->id,
+          'user' => $user->id,
+          'mobile_number' => $user->phonenumber,
+          'email' => $user->email,
+          'amount' => $order->amount,
+          'callback_url' => 'http://example.com/payment/status'
+        ]);
+        return $payment->view('your_custom_view')->receive();
+    }
+```
+Here `$payment->receive()` is replaced with `$payment->view('your_custom_view')->receive()`. Replace `your_custom_view` with your view name which resides in your `resources/views/your_custom_view.blade.php`.
+
+And in your view file make sure you have added this line of code before `</body>` (i.e. before closing body tag), which redirects to payment gateway.
+
+`@yield('payment_redirect')`
+
+Here's a sample custom view: 
+
+```html
+<html>
+<head>
+</head>
+<body>
+    <h1>Custom payment message</h1>
+    @yield('payment_redirect')
+</body>
+</html>
+```
+
+
 
 ## Support on Beerpay
 
