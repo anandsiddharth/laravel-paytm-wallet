@@ -9,6 +9,7 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
 	use HasTransactionStatus;
 	
 	private $parameters = null;
+	private $view = 'paytmwallet::transact';
 
     public function prepare($params = array()){
 		$defaults = [
@@ -41,6 +42,11 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
 		return $this->beginTransaction();
 	}
 
+	public function view($view) {
+		$this->view = $view;
+		return $this;
+	}
+
 	private function beginTransaction(){
 		$params = [
 			'REQUEST_TYPE' => 'DEFAULT',
@@ -54,8 +60,8 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
             'CALLBACK_URL' => $this->parameters['callback_url'],
             'MOBILE_NO' => $this->parameters['mobile_number'],
             'EMAIL' => $this->parameters['email'],
-        ];
-		return view('paytmwallet::transact')->with('params', $params)->with('txn_url', $this->paytm_txn_url)->with('checkSum', getChecksumFromArray($params, $this->merchant_key));
+		];
+		return view('paytmwallet::form')->with('view', $this->view)->with('params', $params)->with('txn_url', $this->paytm_txn_url)->with('checkSum', getChecksumFromArray($params, $this->merchant_key));
 	}
 
     public function getOrderId(){
