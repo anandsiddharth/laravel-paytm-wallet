@@ -1,5 +1,8 @@
 # Laravel Paytm Wallet
 
+[![Latest Stable Version](https://poser.pugx.org/anandsiddharth/laravel-paytm-wallet/v/stable)](https://packagist.org/packages/anandsiddharth/laravel-paytm-wallet)
+[![Total Downloads](https://poser.pugx.org/anandsiddharth/laravel-paytm-wallet/downloads)](https://packagist.org/packages/anandsiddharth/laravel-paytm-wallet)
+[![License](https://poser.pugx.org/anandsiddharth/laravel-paytm-wallet/license)](https://packagist.org/packages/anandsiddharth/laravel-paytm-wallet)
 [![Join the chat at https://gitter.im/laravel-paytm-wallet/Lobby](https://badges.gitter.im/laravel-paytm-wallet/Lobby.svg)](https://gitter.im/laravel-paytm-wallet/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 For Laravel 5.0 and above
