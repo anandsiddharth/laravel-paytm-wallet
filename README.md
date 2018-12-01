@@ -153,9 +153,89 @@ class OrderController extends Controller
 }
 ```
 
+### Initiating Refunds
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use PaytmWallet;
+
+class OrderController extends Controller
+{
+    /**
+    * Initiate refund.
+    *
+    * @return Object
+    */
+    public function refund(){
+        $refund = PaytmWallet::with('refund');
+        $refund->prepare([
+            'order' => $order->id,
+            'reference' => "refund-order-4", // provide refund reference for your future reference (should be unique for each order)
+            'amount' => 300, // refund amount 
+            'transaction' => $order->transaction_id // provide paytm transaction id referring to this order 
+        ]);
+        $refund->initiate();
+        $response = $refund->response() // To get raw response as object
+        
+        if($refund->isSuccessful()){
+          //Refund Successful
+        }else if($refund->isFailed()){
+          //Refund Failed
+        }else if($refund->isOpen()){
+          //Refund Open/Processing
+        }else if($refund->isPending()){
+          //Refund Pending
+        }
+    }
+}
+```
+
+### Check Refund Status
+
+```php
+<?php
+
+namespace App\Http\Controllers;
+
+use PaytmWallet;
+
+class OrderController extends Controller
+{
+    /**
+    * Initiate refund.
+    *
+    * @return Object
+    */
+    public function refund(){
+        $refundStatus = PaytmWallet::with('refund_status');
+        $refundStatus->prepare([
+            'order' => $order->id,
+            'reference' => "refund-order-4", // provide reference number (the same which you have entered for initiating refund)
+        ]);
+        $refundStatus->check();
+        
+        $response = $refundStatus->response() // To get raw response as object
+        
+        if($refundStatus->isSuccessful()){
+          //Refund Successful
+        }else if($refundStatus->isFailed()){
+          //Refund Failed
+        }else if($refundStatus->isOpen()){
+          //Refund Open/Processing
+        }else if($refundStatus->isPending()){
+          //Refund Pending
+        }
+    }
+}
+```
+
 ### Customizing transaction being processed page
 Considering the modern app user interfaces, default "transaction being processed page" is too dull which comes with this package. If you would like to modify this, you have the option to do so. Here's how:
 You just need to change 1 line in you `OrderController`'s code.
+
 ```php
 <?php
 
@@ -203,7 +283,7 @@ Here's a sample custom view:
 </html>
 ```
 
-
+That's all folks!
 
 ## Support on Beerpay
 
