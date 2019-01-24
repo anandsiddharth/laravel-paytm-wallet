@@ -1,16 +1,14 @@
 <?php
 
 namespace Anand\LaravelPaytmWallet\Providers;
-
-use Anand\LaravelPaytmWallet\Facades\PaytmWallet;
-use Illuminate\Http\Request;
-
-//require __DIR__.'/../../lib/encdec_paytm.php';
+use Anand\LaravelPaytmWallet\Traits\HasTransactionStatus;
 
 class RecurringPaymentProvider extends PaytmWalletProvider
 {
+    use HasTransactionStatus;
 
     private $parameters = null;
+    private $view = 'paytmwallet::transact';
 
     public function prepare($params = array ()) {
         $defaults = ['order'           => null,
@@ -73,35 +71,19 @@ class RecurringPaymentProvider extends PaytmWalletProvider
 
         ];
 
-        return view('paytmwallet::transact')
+        return view('paytmwallet::form')
+                ->with('view', $this->view)
                 ->with('params', $params)
                 ->with('txn_url', $this->paytm_txn_url)
                 ->with('checkSum', getChecksumFromArray($params, $this->merchant_key));
     }
 
-    public function isSuccessful() {
-
-        if ($this->response()->STATUS == PaytmWallet::STATUS_SUCCESSFUL) {
-            return true;
+    public function view($view) {
+        if ($view) {
+            $this->view = $view;
         }
 
-        return false;
-    }
-
-    public function isFailed() {
-        if ($this->response()->STATUS == PaytmWallet::STATUS_FAILURE) {
-            return true;
-        }
-
-        return false;
-    }
-
-    public function isOpen() {
-        if ($this->response()->STATUS == PaytmWallet::STATUS_OPEN) {
-            return true;
-        }
-
-        return false;
+        return $this;
     }
 
     public function getOrderId() {
