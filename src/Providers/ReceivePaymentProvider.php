@@ -67,10 +67,10 @@ class ReceivePaymentProvider extends PaytmWalletProvider{
 	}
 
     public function getOrderId(){
-        return $this->response()->ORDERID;
+        return $this->response()['ORDERID'];
     }
     public function getTransactionId(){
-        return $this->response()->TXNID;
+        return $this->response()['TXNID'];
     }
 
 }
