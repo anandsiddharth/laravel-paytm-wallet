@@ -87,15 +87,15 @@ class RecurringPaymentProvider extends PaytmWalletProvider
     }
 
     public function getOrderId() {
-        return $this->response()->ORDERID;
+        return $this->response()['ORDERID'];
     }
 
     public function getSubscriptionId() {
-        return $this->response()->SUBS_ID;
+        return $this->response()['SUBS_ID'];
     }
 
     public function getTransactionId() {
-        return $this->response()->TXNID;
+        return $this->response()['TXNID'];
     }
 
 }
