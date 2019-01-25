@@ -61,7 +61,7 @@ class RefundPaymentProvider extends PaytmWalletProvider{
     }
 
     public function isRefundAlreadyRaised() {
-        if ($this->isFailed() && $this->response()->RESPCODE == PaytmWallet::REPSONSE_REFUND_ALREADY_RAISED) {
+        if ($this->isFailed() && $this->response()['RESPCODE'] == PaytmWallet::REPSONSE_REFUND_ALREADY_RAISED) {
             return true;
         }
         return false;
