@@ -93,7 +93,7 @@ class OrderController extends Controller
     {
         $transaction = PaytmWallet::with('receive');
         
-        $response = $transaction->response() // To get raw response as object
+        $response = $transaction->response() // To get raw response as array
         //Check out response parameters sent by paytm here -> http://paywithpaytm.com/developer/paytm_api_doc?target=interpreting-response-sent-by-paytm
         
         if($transaction->isSuccessful()){
@@ -138,7 +138,7 @@ class OrderController extends Controller
         $status->prepare(['order' => $order->id]);
         $status->check();
         
-        $response = $status->response() // To get raw response as object
+        $response = $status->response() // To get raw response as array
         //Check out response parameters sent by paytm here -> http://paywithpaytm.com/developer/paytm_api_doc?target=txn-status-api-description
         
         if($status->isSuccessful()){
@@ -181,7 +181,7 @@ class OrderController extends Controller
             'transaction' => $order->transaction_id // provide paytm transaction id referring to this order 
         ]);
         $refund->initiate();
-        $response = $refund->response() // To get raw response as object
+        $response = $refund->response() // To get raw response as array
         
         if($refund->isSuccessful()){
           //Refund Successful
@@ -220,7 +220,7 @@ class OrderController extends Controller
         ]);
         $refundStatus->check();
         
-        $response = $refundStatus->response() // To get raw response as object
+        $response = $refundStatus->response() // To get raw response as array
         
         if($refundStatus->isSuccessful()){
           //Refund Successful
