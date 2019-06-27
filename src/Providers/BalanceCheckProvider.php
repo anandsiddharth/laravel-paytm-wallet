@@ -1,17 +1,20 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet\Providers;
+namespace Lakshmaji\LaravelPaytmWallet\Providers;
+
 use Illuminate\Http\Request;
 // require __DIR__.'/../../lib/encdec_paytm.php';
 
-class BalanceCheckProvider extends PaytmWalletProvider{
+class BalanceCheckProvider extends PaytmWalletProvider
+{
 
 
 	private $parameters = null;
 
 
 
-	public function prepare($params = array()){
+	public function prepare($params = array())
+	{
 		$defaults = [
 			'token' => NULL,
 		];
@@ -21,8 +24,8 @@ class BalanceCheckProvider extends PaytmWalletProvider{
 
 			if ($value == NULL) {
 
-				throw new \Exception(' \''.$key.'\' parameter not specified in array passed in prepare() method');
-				
+				throw new \Exception(' \'' . $key . '\' parameter not specified in array passed in prepare() method');
+
 				return false;
 			}
 		}
@@ -30,14 +33,16 @@ class BalanceCheckProvider extends PaytmWalletProvider{
 		return $this;
 	}
 
-	public function check(){
+	public function check()
+	{
 		if ($this->parameters == null) {
 			throw new \Exception("prepare() method not called");
 		}
 		return $this->beginTransaction();
 	}
 
-	private function beginTransaction(){
+	private function beginTransaction()
+	{
 
 		$params = [
 			'MID' => $this->merchant_id,
@@ -45,5 +50,4 @@ class BalanceCheckProvider extends PaytmWalletProvider{
 		];
 		return $this->api_call($this->paytm_balance_check_url, $params);
 	}
-
 }

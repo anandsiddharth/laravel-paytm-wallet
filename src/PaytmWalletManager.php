@@ -1,77 +1,88 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet;
+namespace Lakshmaji\LaravelPaytmWallet;
 
 use Illuminate\Support\Manager;
 use Illuminate\Http\Request;
-class PaytmWalletManager extends Manager implements Contracts\Factory{
-	
+
+class PaytmWalletManager extends Manager implements Contracts\Factory
+{
+
 
 	private $config;
 
 
 
-	public function with($driver){
+	public function with($driver)
+	{
 		return $this->driver($driver);
 	}
 
-	protected function createReceiveDriver(){
+	protected function createReceiveDriver()
+	{
 		$this->config = $this->app['config']['services.paytm-wallet'];
 
 		return $this->buildProvider(
-			'Anand\LaravelPaytmWallet\Providers\ReceivePaymentProvider',
+			'Lakshmaji\LaravelPaytmWallet\Providers\ReceivePaymentProvider',
 			$this->config
-			);
+		);
 	}
 
-	protected function createStatusDriver(){
+	protected function createStatusDriver()
+	{
 		$this->config = $this->app['config']['services.paytm-wallet'];
 		return $this->buildProvider(
-			'Anand\LaravelPaytmWallet\Providers\StatusCheckProvider',
+			'Lakshmaji\LaravelPaytmWallet\Providers\StatusCheckProvider',
 			$this->config
-			);
+		);
 	}
 
-	protected function createBalanceDriver(){
+	protected function createBalanceDriver()
+	{
 		$this->config = $this->app['config']['services.paytm-wallet'];
 		return $this->buildProvider(
-			'Anand\LaravelPaytmWallet\Providers\BalanceCheckProvider',
+			'Lakshmaji\LaravelPaytmWallet\Providers\BalanceCheckProvider',
 			$this->config
-			);
+		);
 	}
 
-	protected function createAppDriver(){
+	protected function createAppDriver()
+	{
 		$this->config = $this->app['config']['services.paytm-wallet'];
 		return $this->buildProvider(
-			'Anand\LaravelPaytmWallet\Providers\PaytmAppProvider',
+			'Lakshmaji\LaravelPaytmWallet\Providers\PaytmAppProvider',
 			$this->config
-			);
+		);
 	}
 
-	protected function createRefundDriver() {
+	protected function createRefundDriver()
+	{
 		$this->config = $this->app['config']['services.paytm-wallet'];
 		return $this->buildProvider(
-			'Anand\LaravelPaytmWallet\Providers\RefundPaymentProvider',
+			'Lakshmaji\LaravelPaytmWallet\Providers\RefundPaymentProvider',
 			$this->config
-			);
+		);
 	}
-	
-	protected function createRefundStatusDriver(){
+
+	protected function createRefundStatusDriver()
+	{
 		$this->config = $this->app['config']['services.paytm-wallet'];
 		return $this->buildProvider(
-			'Anand\LaravelPaytmWallet\Providers\RefundStatusCheckProvider',
+			'Lakshmaji\LaravelPaytmWallet\Providers\RefundStatusCheckProvider',
 			$this->config
-			);
+		);
 	}
-	
-	public function getDefaultDriver(){
+
+	public function getDefaultDriver()
+	{
 		throw new \Exception('No driver was specified. - Laravel Paytm Wallet');
 	}
 
-	public function buildProvider($provider, $config){
+	public function buildProvider($provider, $config)
+	{
 		return new $provider(
 			$this->app['request'],
 			$config
-			);
+		);
 	}
 }

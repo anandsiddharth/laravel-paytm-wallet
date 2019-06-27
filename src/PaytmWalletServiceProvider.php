@@ -1,6 +1,6 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet;
+namespace Lakshmaji\LaravelPaytmWallet;
 
 
 use Illuminate\Support\ServiceProvider;
@@ -23,20 +23,22 @@ class PaytmWalletServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        $this->app->singleton('Anand\LaravelPaytmWallet\Contracts\Factory', function ($app) {
-        // $this->app->singleton('PaytmWallet', function ($app) {
+        $this->app->singleton('Lakshmaji\LaravelPaytmWallet\Contracts\Factory', function ($app) {
+            // $this->app->singleton('PaytmWallet', function ($app) {
             return new PaytmWalletManager($app);
         });
     }
 
 
-    public function boot(){
-        $this->loadViewsFrom(__DIR__.'/resources/views', 'paytmwallet');
+    public function boot()
+    {
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'paytmwallet');
     }
 
 
 
-    public function provides(){
-        return ['Anand\LaravelPaytmWallet\Contracts\Factory'];
+    public function provides()
+    {
+        return ['Lakshmaji\LaravelPaytmWallet\Contracts\Factory'];
     }
 }

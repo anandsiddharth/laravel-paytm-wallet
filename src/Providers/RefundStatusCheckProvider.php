@@ -1,16 +1,19 @@
 <?php
-namespace Anand\LaravelPaytmWallet\Providers;
-use Anand\LaravelPaytmWallet\Traits\HasTransactionStatus;
-use Illuminate\Http\Request;
+namespace Lakshmaji\LaravelPaytmWallet\Providers;
+
+use Lakshmaji\LaravelPaytmWallet\Traits\HasTransactionStatus;
+use Lakshmaji\Http\Request;
 
 
-class RefundStatusCheckProvider extends PaytmWalletProvider{
+class RefundStatusCheckProvider extends PaytmWalletProvider
+{
 	use HasTransactionStatus;
-	
-	private $parameters = null;
-    protected $response;
 
-	public function prepare($params = array()){
+	private $parameters = null;
+	protected $response;
+
+	public function prepare($params = array())
+	{
 		$defaults = [
 			'order' => NULL,
 			'reference' => NULL,
@@ -20,9 +23,9 @@ class RefundStatusCheckProvider extends PaytmWalletProvider{
 		foreach ($_p as $key => $value) {
 
 			if ($value == NULL) {
-				
-				throw new \Exception(' \''.$key.'\' parameter not specified in array passed in prepare() method');
-				
+
+				throw new \Exception(' \'' . $key . '\' parameter not specified in array passed in prepare() method');
+
 				return false;
 			}
 		}
@@ -31,15 +34,17 @@ class RefundStatusCheckProvider extends PaytmWalletProvider{
 	}
 
 
-	public function check(){
+	public function check()
+	{
 		if ($this->parameters == null) {
 			throw new \Exception("prepare() method not called");
 		}
 		return $this->beginTransaction();
 	}
-	
 
-	private function beginTransaction(){
+
+	private function beginTransaction()
+	{
 		$params = array(
 			'MID' => $this->merchant_id,
 			'ORDERID' => $this->parameters['order'],
@@ -51,16 +56,17 @@ class RefundStatusCheckProvider extends PaytmWalletProvider{
 		return $this;
 	}
 
-	public function response(){
+	public function response()
+	{
 		return $this->response;
 	}
 
-    public function getOrderId(){
-        return $this->response()['ORDERID'];
-    }
-    public function getTransactionId(){
-        return $this->response()['TXNID'];
-    }
-
-
+	public function getOrderId()
+	{
+		return $this->response()['ORDERID'];
+	}
+	public function getTransactionId()
+	{
+		return $this->response()['TXNID'];
+	}
 }

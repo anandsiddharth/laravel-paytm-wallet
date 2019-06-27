@@ -1,6 +1,6 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet\Facades;
+namespace Lakshmaji\LaravelPaytmWallet\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
@@ -19,7 +19,7 @@ class PaytmWallet extends Facade
     const STATUS_OPEN = 'OPEN';
     const STATUS_PENDING = 'PENDING';
 
-    const RESPONSE_SUCCESSFUL="01";
+    const RESPONSE_SUCCESSFUL = "01";
     const RESPONSE_CANCELLED = "141";
     const RESPONSE_FAILED = "227";
     const RESPONSE_PAGE_CLOSED = "810";
@@ -29,6 +29,6 @@ class PaytmWallet extends Facade
 
     protected static function getFacadeAccessor()
     {
-        return 'Anand\LaravelPaytmWallet\Contracts\Factory';
+        return 'Lakshmaji\LaravelPaytmWallet\Contracts\Factory';
     }
 }

@@ -1,27 +1,31 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet\Providers;
+namespace Lakshmaji\LaravelPaytmWallet\Providers;
+
 use Illuminate\Http\Request;
 
-class PaytmAppProvider extends PaytmWalletProvider{
+class PaytmAppProvider extends PaytmWalletProvider
+{
 
-	public function generate(Request $request){
+	public function generate(Request $request)
+	{
 		$checksum = getChecksumFromArray($request->all(), $this->merchant_key);
-		return response()->json([ 'CHECKSUMHASH' => $checksum, 'ORDER_ID' => $request->get('ORDER_ID'), 'payt_STATUS'  => '1' ]);
+		return response()->json(['CHECKSUMHASH' => $checksum, 'ORDER_ID' => $request->get('ORDER_ID'), 'payt_STATUS'  => '1']);
 	}
 
-	public function verify(Request $request, $success = null, $error = null){
+	public function verify(Request $request, $success = null, $error = null)
+	{
 		$paramList = $request->all();
 		$return_array = $request->all();
 		$paytmChecksum = $request->get('CHECKSUMHASH');
 
 		$isValidChecksum = verifychecksum_e($paramList, $this->merchant_key, $paytmChecksum);
-		
+
 		if ($isValidChecksum) {
 			if ($success != null && is_callable($success)) {
 				$success();
 			}
-		}else{
+		} else {
 			if ($error != null && is_callable($error)) {
 				$error();
 			}
@@ -33,6 +37,4 @@ class PaytmAppProvider extends PaytmWalletProvider{
 
 		return view('paytmwallet::app_redirect')->with('json', $encoded_json);
 	}
-
-
 }

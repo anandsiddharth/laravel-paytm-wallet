@@ -1,6 +1,6 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet\Contracts;
+namespace Lakshmaji\LaravelPaytmWallet\Contracts;
 
 interface Provider
 {
@@ -10,5 +10,4 @@ interface Provider
      * @return object
      */
     public function response();
-
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace Anand\LaravelPaytmWallet\Contracts;
+namespace Lakshmaji\LaravelPaytmWallet\Contracts;
 
 interface Factory
 {
@@ -8,8 +8,8 @@ interface Factory
      * Get Paytm Wallet Provider
      *
      * @param  string  $driver
-     * @return \Anand\LaravelPaytmWallet\Contracts\Provider
+     * @return \Lakshmaji\LaravelPaytmWallet\Contracts\Provider
      */
-    
+
     public function driver($do = null);
 }
