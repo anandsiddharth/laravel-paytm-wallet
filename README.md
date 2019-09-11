@@ -37,17 +37,28 @@ Also, add the `PaytmWallet` facade to the `aliases` array in your `app` configur
     'PaytmWallet' => Anand\LaravelPaytmWallet\Facades\PaytmWallet::class,
 ],
 ```
+#### Add the paytm credentials to the `.env` file
+```bash
+PAYTM_ENVIRONMENT=local
+PAYTM_MERCHANT_ID=YOUR_MERCHANT_ID_HERE
+PAYTM_MERCHANT_KEY=YOUR_SECRET_KEY_HERE
+PAYTM_MERCHANT_WEBSITE=YOUR_MERCHANT_WEBSITE
+PAYTM_CHANNEL=YOUR_CHANNEL_HERE
+PAYTM_INDUSTRY_TYPE=YOUR_INDUSTRY_TYPE_HERE
+```
+
+
 #### One more step to go....
 On your `config/services.php` add the following configuration
 
 ```php
 'paytm-wallet' => [
-    'env' => 'production', // values : (local | production)
-    'merchant_id' => 'YOUR_MERCHANT_ID',
-    'merchant_key' => 'YOUR_MERCHANT_KEY',
-    'merchant_website' => 'YOUR_WEBSITE',
-    'channel' => 'YOUR_CHANNEL',
-    'industry_type' => 'YOUR_INDUSTRY_TYPE',
+        'env' => env('PAYTM_ENVIRONMENT'), // values : (local | production)
+        'merchant_id' => env('PAYTM_MERCHANT_ID'),
+        'merchant_key' => env('PAYTM_MERCHANT_KEY'),
+        'merchant_website' => env('PAYTM_MERCHANT_WEBSITE'),
+        'channel' => env('PAYTM_CHANNEL'),
+        'industry_type' => env('PAYTM_INDUSTRY_TYPE'),
 ],
 ```
 Note : All the credentials mentioned are provided by Paytm after signing up as merchant.
