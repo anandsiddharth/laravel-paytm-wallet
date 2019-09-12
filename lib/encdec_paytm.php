@@ -29,8 +29,9 @@ function generateSalt_e($length) {
 function checkString_e($value) {
     $myvalue = ltrim($value);
     $myvalue = rtrim($myvalue);
-    if (in_array($myvalue, ['null', 'NULL']))
+    if (in_array($myvalue, ['null', 'NULL'])) {
         $myvalue = '';
+    }
     return $myvalue;
 }
 
