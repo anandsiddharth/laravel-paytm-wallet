@@ -10,5 +10,4 @@ interface Provider
      * @return object
      */
     public function response();
-
 }

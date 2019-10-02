@@ -1,17 +1,20 @@
 <?php
-function encrypt_e_openssl($input, $ky){
+function encrypt_e_openssl($input, $ky)
+{
     $iv = "@@@@&&&&####$$$$";
-    $data = openssl_encrypt ( $input , "AES-128-CBC" , $ky, 0, $iv );
+    $data = openssl_encrypt($input, "AES-128-CBC", $ky, 0, $iv);
     return $data;
 }
 
-function decrypt_e_openssl($crypt, $ky){
+function decrypt_e_openssl($crypt, $ky)
+{
     $iv = "@@@@&&&&####$$$$";
-    $data = openssl_decrypt ( $crypt , "AES-128-CBC" , $ky, 0, $iv );
+    $data = openssl_decrypt($crypt, "AES-128-CBC", $ky, 0, $iv);
     return $data;
 }
 
-function generateSalt_e($length) {
+function generateSalt_e($length)
+{
     $random = "";
     srand((double) microtime() * 1000000);
 
@@ -26,7 +29,8 @@ function generateSalt_e($length) {
     return $random;
 }
 
-function checkString_e($value) {
+function checkString_e($value)
+{
     $myvalue = ltrim($value);
     $myvalue = rtrim($myvalue);
     if (in_array($myvalue, ['null', 'NULL'])) {
@@ -35,7 +39,8 @@ function checkString_e($value) {
     return $myvalue;
 }
 
-function getChecksumFromArray($arrayList, $key, $sort=1) {
+function getChecksumFromArray($arrayList, $key, $sort=1)
+{
     if ($sort != 0) {
         ksort($arrayList);
     }
@@ -48,8 +53,8 @@ function getChecksumFromArray($arrayList, $key, $sort=1) {
 
     return $checksum;
 }
-function getChecksumFromString($str, $key) {
-
+function getChecksumFromString($str, $key)
+{
     $salt = generateSalt_e(4);
     $finalString = $str . "|" . $salt;
     $hash = hash("sha256", $finalString);
@@ -58,7 +63,8 @@ function getChecksumFromString($str, $key) {
     return $checksum;
 }
 
-function verifychecksum_e($arrayList, $key, $checksumvalue) {
+function verifychecksum_e($arrayList, $key, $checksumvalue)
+{
     $arrayList = removeCheckSumParam($arrayList);
     ksort($arrayList);
     $str = getArray2Str($arrayList);
@@ -79,7 +85,8 @@ function verifychecksum_e($arrayList, $key, $checksumvalue) {
     return $validFlag;
 }
 
-function verifychecksum_eFromStr($str, $key, $checksumvalue) {
+function verifychecksum_eFromStr($str, $key, $checksumvalue)
+{
     $paytm_hash = decrypt_e_openssl($checksumvalue, $key);
     $salt = substr($paytm_hash, -4);
 
@@ -97,7 +104,8 @@ function verifychecksum_eFromStr($str, $key, $checksumvalue) {
     return $validFlag;
 }
 
-function getArray2Str($arrayList) {
+function getArray2Str($arrayList)
+{
     $paramStr = "";
     $flag = 1;
     foreach ($arrayList as $key => $value) {
@@ -111,29 +119,34 @@ function getArray2Str($arrayList) {
     return $paramStr;
 }
 
-function redirect2PG($paramList, $key) {
+function redirect2PG($paramList, $key)
+{
     $hashString = getchecksumFromArray($paramList);
     $checksum = encrypt_e_openssl($hashString, $key);
 }
 
-function removeCheckSumParam($arrayList) {
+function removeCheckSumParam($arrayList)
+{
     if (isset($arrayList["CHECKSUMHASH"])) {
         unset($arrayList["CHECKSUMHASH"]);
     }
     return $arrayList;
 }
 
-function getTxnStatus($requestParamList) {
+function getTxnStatus($requestParamList)
+{
     return callAPI(PAYTM_STATUS_QUERY_URL, $requestParamList);
 }
 
-function initiateTxnRefund($requestParamList) {
-    $CHECKSUM = getChecksumFromArray($requestParamList,PAYTM_MERCHANT_KEY,0);
+function initiateTxnRefund($requestParamList)
+{
+    $CHECKSUM = getChecksumFromArray($requestParamList, PAYTM_MERCHANT_KEY, 0);
     $requestParamList["CHECKSUM"] = $CHECKSUM;
     return callAPI(PAYTM_REFUND_URL, $requestParamList);
 }
 
-function callAPI($apiURL, $requestParamList) {
+function callAPI($apiURL, $requestParamList)
+{
     $jsonResponse = "";
     $responseParamList = array();
     $JsonData =json_encode($requestParamList);
@@ -142,13 +155,16 @@ function callAPI($apiURL, $requestParamList) {
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_POSTFIELDS, $postData);
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt ($ch, CURLOPT_SSL_VERIFYHOST, 0);
-    curl_setopt ($ch, CURLOPT_SSL_VERIFYPEER, 0);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, array(
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+    curl_setopt(
+        $ch,
+        CURLOPT_HTTPHEADER,
+        array(
             'Content-Type: application/json',
             'Content-Length: ' . strlen($postData))
     );
     $jsonResponse = curl_exec($ch);
-    $responseParamList = json_decode($jsonResponse,true);
+    $responseParamList = json_decode($jsonResponse, true);
     return $responseParamList;
 }
