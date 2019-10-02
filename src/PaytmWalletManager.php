@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class PaytmWalletManager extends Manager implements Contracts\Factory{
 	
 
-	private $config;
+	protected $config;
 
 
 
