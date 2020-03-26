@@ -45,8 +45,8 @@ class PaytmWalletProvider implements ProviderContract {
 
 	public function response(){
 		$checksum = $this->request->get('CHECKSUMHASH');
-		if(verifychecksum_e($this->request->all(), $this->merchant_key, $checksum) == "TRUE"){
-		    return $this->response = $this->request->all();
+		if(verifychecksum_e($this->request->post(), $this->merchant_key, $checksum) == "TRUE"){
+		    return $this->response = $this->request->post();
 		}
         	throw new \Exception('Invalid checksum');
 	}
