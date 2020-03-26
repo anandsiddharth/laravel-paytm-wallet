@@ -63,6 +63,20 @@ On your `config/services.php` add the following configuration
 ```
 Note : All the credentials mentioned are provided by Paytm after signing up as merchant.
 
+#### Laravel 7 Changes
+Our package is comptible with Laravel 7 but same_site setting is changed in default Laravel installation, make sure you change `same_site` to `null` in `config/session.php` or callback won't include cookies and you will be logged out when a payment is completed
+
+```php
+<?php
+
+use Illuminate\Support\Str;
+
+return [
+  /...
+  'same_site' => null,
+];
+```
+
 ## Usage
 
 
