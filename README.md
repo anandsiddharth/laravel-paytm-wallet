@@ -5,10 +5,10 @@
 [![License](https://poser.pugx.org/anandsiddharth/laravel-paytm-wallet/license)](https://packagist.org/packages/anandsiddharth/laravel-paytm-wallet)
 [![Join the chat at https://gitter.im/laravel-paytm-wallet/Lobby](https://badges.gitter.im/laravel-paytm-wallet/Lobby.svg)](https://gitter.im/laravel-paytm-wallet/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-**For Laravel 5.0** use version `^1.0.0`
-**For Laravel 6.0** use version `^1.0.0`
-**For Laravel 7.0** use version `^1.0.0`
-**For Laravel 8.0** use version `^2.0.0`
+**For Laravel 5.0** use version `^1.0.0` <br />
+**For Laravel 6.0** use version `^1.0.0` <br />
+**For Laravel 7.0** use version `^1.0.0` <br />
+**For Laravel 8.0** use version `^2.0.0` <br />
 
 ## Introduction
 Integrate paytm wallet in your laravel application easily with this package. This package uses official Paytm PHP SDK's.
