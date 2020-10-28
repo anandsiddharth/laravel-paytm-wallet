@@ -1,7 +1,6 @@
 <?php
 
 namespace Anand\LaravelPaytmWallet;
-
 use Illuminate\Support\Manager;
 use Illuminate\Http\Request;
 class PaytmWalletManager extends Manager implements Contracts\Factory{
@@ -16,7 +15,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 	}
 
 	protected function createReceiveDriver(){
-		$this->config = $this->app['config']['services.paytm-wallet'];
+		$this->config = $this->container['config']['services.paytm-wallet'];
 
 		return $this->buildProvider(
 			'Anand\LaravelPaytmWallet\Providers\ReceivePaymentProvider',
@@ -25,7 +24,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 	}
 
 	protected function createStatusDriver(){
-		$this->config = $this->app['config']['services.paytm-wallet'];
+		$this->config = $this->container['config']['services.paytm-wallet'];
 		return $this->buildProvider(
 			'Anand\LaravelPaytmWallet\Providers\StatusCheckProvider',
 			$this->config
@@ -33,7 +32,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 	}
 
 	protected function createBalanceDriver(){
-		$this->config = $this->app['config']['services.paytm-wallet'];
+		$this->config = $this->container['config']['services.paytm-wallet'];
 		return $this->buildProvider(
 			'Anand\LaravelPaytmWallet\Providers\BalanceCheckProvider',
 			$this->config
@@ -41,7 +40,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 	}
 
 	protected function createAppDriver(){
-		$this->config = $this->app['config']['services.paytm-wallet'];
+		$this->config = $this->container['config']['services.paytm-wallet'];
 		return $this->buildProvider(
 			'Anand\LaravelPaytmWallet\Providers\PaytmAppProvider',
 			$this->config
@@ -49,7 +48,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 	}
 
 	protected function createRefundDriver() {
-		$this->config = $this->app['config']['services.paytm-wallet'];
+		$this->config = $this->container['config']['services.paytm-wallet'];
 		return $this->buildProvider(
 			'Anand\LaravelPaytmWallet\Providers\RefundPaymentProvider',
 			$this->config
@@ -57,7 +56,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 	}
 	
 	protected function createRefundStatusDriver(){
-		$this->config = $this->app['config']['services.paytm-wallet'];
+		$this->config = $this->container['config']['services.paytm-wallet'];
 		return $this->buildProvider(
 			'Anand\LaravelPaytmWallet\Providers\RefundStatusCheckProvider',
 			$this->config
@@ -70,7 +69,7 @@ class PaytmWalletManager extends Manager implements Contracts\Factory{
 
 	public function buildProvider($provider, $config){
 		return new $provider(
-			$this->app['request'],
+			$this->container['request'],
 			$config
 			);
 	}
