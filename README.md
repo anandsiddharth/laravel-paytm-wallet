@@ -318,7 +318,7 @@ That's all folks!
 
 ## Wait you still here?
 
-I am working on this cool project called yoheim. It's the all in one collaboration platform to manage and share ssh servers.
+I am working on this cool project called yoheim. It's an all in one collaboration platform to manage and share ssh servers.
 **Download now and start using it for free** www.yoheim.com
 
 
