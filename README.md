@@ -321,8 +321,10 @@ That's all folks!
 I am working on this cool project called yoheim. It's the all in one collaboration platform to manage and share ssh servers.
 **Download now and start using it for free** www.yoheim.com
 
-[![Yoheim logo](https://res.cloudinary.com/yoheim/image/upload/v1603384995/assets/brand/yoheim-logo-original_z1afn0.png =300px)](https://www.yoheim.com)
 
+<a href="https://www.yoheim.com" > 
+    <img alt="yoheim log" src="https://res.cloudinary.com/yoheim/image/upload/v1603384995/assets/brand/yoheim-logo-original_z1afn0.png" width="300px" />
+</a>
 
 
 
